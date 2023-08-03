@@ -115,10 +115,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
           });
         }
-        let done = false;
         const controller = new AbortController();
         const initialTimeout = 10000; // Initial time out is big
-        const chunkTimeout = 10; // Timeout to wait for next chunk
+        const chunkTimeout = 100; // Timeout to wait for next chunk
         var timeoutId = setTimeout(() => {
           controller.abort(); // Abort the fetch if timeout expires
         }, initialTimeout);
@@ -157,6 +156,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           const decoder = new TextDecoder();
           let isFirst = true;
           let text = '';
+          let done = false;
           while (!done) {
             if (stopConversationRef.current === true) {
               controller.abort();

@@ -120,7 +120,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         const initialTimeout = 10000; // Initial time out is big
         const chunkTimeout = 10; // Timeout to wait for next chunk
         var timeoutId = setTimeout(() => {
-          done = true;
           controller.abort(); // Abort the fetch if timeout expires
         }, initialTimeout);
         const response = await fetch(endpoint, {
